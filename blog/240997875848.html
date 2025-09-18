@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link rel="stylesheet" href="../pages/blog/css/style.css">
+  	<link rel="shortcut icon" type="image/x-icon" href="../app/img/logo.png"/>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>AML Check - Initiatives</title>
+	<style type="text/css">
+		.login-modal-wrapper {
+		  position: fixed;
+		  inset: 0px;
+		  opacity: 0;
+		  visibility: hidden;
+		  z-index: 1000;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  background: rgba(0, 0, 0, 0.51);
+		  transition: opacity 0.5s ease 0s;
+		}
+
+		.login-modal-overlay {
+			position: fixed;
+		  opacity: 1;
+		  z-index: 998;
+		  inset: 0;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		}
+
+
+		.login-modal-box {
+			background: #efefef;
+		  height: 500px;
+		  width: max-content;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  justify-content: center;
+		  text-align: center;
+		  gap: 25px;
+		  width: 350px;
+		  border-radius: 20px;
+		  z-index: 999;
+		  transition: 0.56s;
+		}
+
+		.login-modal-text h5 {
+			font-size: 35px;
+			font-weight: 900;
+			text-transform: uppercase;
+		}
+
+		.login-modal-text p {
+			font-size: 16px;
+			line-height: 30px;
+		}
+
+
+		.login-modal-inputs {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		.login-modal-inputs input {
+			height: 20px;
+			padding-left: 15px;
+			height: 40px;
+			width: 270px;
+			font-size: 16px;
+			border-radius: 7px;
+			border: 1px solid #CECECE;
+			outline: none;
+		}
+
+		.modal-box-btn button {
+			width: 280px;
+			height: 50px;
+			background: #007BFB;
+			font-size: 18px;
+			font-weight: 800;
+			border-radius: 40px;
+			color: #fff;
+			transition: 0.56s;
+		}
+
+		.modal-box-btn button:hover {
+			background: #2F57D4;
+		  	cursor: pointer;
+		}
+
+		.modal-box-btn {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.error-modal-text {
+			width: 328px;
+			border: 1px solid #CECECE;
+			border-radius: 12px;
+			color: #A1A3A7;
+			background: #fff;
+			font-size: 14px;
+			text-align: center;
+			padding: 4px 0px;
+		}
+
+		.error-modal-text span {
+			color: #0057FF;
+			cursor: pointer;
+		}
+
+		.hader-logo {
+			transition: .35s;
+		}
+		.hader-logo:hover {
+			cursor: pointer;
+			transform: scale(.9);
+			opacity: .6;
+		}
+	</style>
+    <style>
+        .footer {
+            width: 100%;
+            padding: 6rem 0 4rem;
+            background-color: #000
+        }
+
+        @media (max-width: 760px) {
+            .footer {
+                padding: 4rem 0
+            }
+        }
+
+        .footer_logo {
+            max-width: 24rem;
+            margin-bottom: 30px;
+            display: block
+        }
+
+        @media (max-width: 760px) {
+            .footer_logo {
+                max-width: 144px
+            }
+        }
+
+        .footer__wrap {
+            width: 100%
+        }
+
+        .footer__top {
+            margin-bottom: 4rem;
+            border-bottom: 1px solid #323d46;
+            padding-bottom: 4rem
+        }
+
+        .footer__top .label {
+            display: block;
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 100%;
+            color: #a1a1a1;
+            margin-bottom: 1.2rem
+        }
+
+        .footer__top p {
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            line-height: 140%;
+            color: #a1a1a1;
+            max-width: 320px
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between
+        }
+
+        @media (max-width: 760px) {
+            .footer__bottom {
+                display: block
+            }
+        }
+
+        .footer__item {
+            margin-bottom: 11rem
+        }
+
+        @media (max-width: 760px) {
+            .footer__item {
+                margin-bottom: 50px
+            }
+        }
+
+        .footer__item_social {
+            width: 100%;
+            max-width: 33.3333%
+        }
+
+        @media (max-width: 760px) {
+            .footer__item_social {
+                max-width: 60%
+            }
+        }
+
+        @media (max-width: 760px) {
+            .footer__item_social {
+                max-width: 100%
+            }
+        }
+
+        .footer__item .label {
+            margin: 0 0 3rem;
+            font-weight: 400;
+            font-size: 2rem;
+            line-height: 120%;
+            color: #a1a1a1;
+            display: block
+        }
+
+        .footer__item ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-left: -.8rem;
+            box-sizing: content-box
+        }
+
+        .footer__item ul li:not(:last-child) {
+            margin-bottom: 2rem;
+            display: flex;
+            box-sizing: content-box
+        }
+
+        .footer__item ul a {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 8px;
+            font-weight: 500;
+            font-size: 1.3rem;
+            line-height: 120%;
+            color: #fff;
+            border-radius: 8px;
+            transition: all .25s ease-in-out;
+            box-sizing: content-box
+        }
+
+        .footer__item ul a svg {
+            position: relative;
+            margin-right: 1.2rem;
+            border-radius: 50%;
+            font-size: 2.8rem;
+            color: #1d1d1d
+        }
+
+        .footer__item ul a:hover {
+            background-color: #ffffff1a
+        }
+
+        .footer__item:not(:last-child) {
+            margin-right: 3rem
+        }
+
+        .footer__social {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start
+        }
+
+        .footer__social li {
+            width: 50%
+        }
+
+        @media (max-width: 370px) {
+            .footer__social li {
+                width: 100%
+            }
+        }
+
+        .footer__info {
+            margin: 0;
+            font-weight: 500;
+            font-size: 1.6rem;
+            line-height: 100%;
+            color: #a1a1a1
+        }
+
+
+        .why-amlbot {
+            width: 100%;
+            margin-bottom: 16rem
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot {
+                margin-bottom: 8rem
+            }
+        }
+
+        .why-amlbot__wrap {
+            width: 100%
+        }
+
+        .why-amlbot__wrap h2 {
+            margin-bottom: 5rem
+        }
+
+        .why-amlbot__items {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__items {
+                display: block;
+                margin-bottom: 0
+            }
+        }
+
+        .why-amlbot__items:last-child {
+            margin-bottom: 0
+        }
+
+        .why-amlbot__item {
+            padding: 5rem;
+            border-radius: 20px;
+            box-sizing: border-box
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__item {
+                width: 100% !important;
+                margin-bottom: 3rem;
+                padding: 30px 24px
+            }
+        }
+
+        .why-amlbot__item_white {
+            background-color: #fff;
+            color: #000
+        }
+
+        .why-amlbot__item_blue {
+            background-color: #007bfb;
+            color: #fff
+        }
+
+        .why-amlbot__item_gray {
+            background-color: #323d46;
+            color: #fff;
+            padding-right: 4rem;
+            padding-left: 4rem
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__item_gray {
+                padding: 30px 24px
+            }
+        }
+
+        .why-amlbot__item_first {
+            width: calc(50% - 1.5rem)
+        }
+
+        .why-amlbot__item_first .why-amlbot__item-image img {
+            max-width: 17.5rem
+        }
+
+        .why-amlbot__item_second {
+            width: calc(50% - 1.5rem)
+        }
+
+        .why-amlbot__item_second .why-amlbot__item-image {
+            max-width: 39rem;
+            margin-right: auto;
+            margin-left: auto
+        }
+
+        .why-amlbot__item_third {
+            width: calc(66.6666666% - 1.5rem)
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__item_third .why-amlbot__item-image {
+                max-width: 220px
+            }
+        }
+
+        .why-amlbot__item_third .why-amlbot__item-image img {
+            max-width: 40rem;
+            margin-bottom: -15%;
+            margin-left: -10%
+        }
+
+        .why-amlbot__item_fourth {
+            width: calc(33.3333333% - 1.5rem)
+        }
+
+        .why-amlbot__item_fourth .why-amlbot__item-image {
+            max-width: 18.5rem;
+            margin-right: auto;
+            margin-left: auto
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__item_fourth .why-amlbot__item-image {
+                max-width: 130px
+            }
+        }
+
+        .why-amlbot__item-title {
+            display: block;
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 120%;
+            margin: 0 0 20px
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__item-title {
+                font-size: 2.8rem;
+                margin-bottom: 2rem
+            }
+        }
+
+        .why-amlbot__item-text {
+            display: block;
+            margin: 0;
+            font-weight: 400;
+            font-size: 2.4rem;
+            line-height: 150%;
+            margin-bottom: 3rem
+        }
+
+        .why-amlbot__item-text b {
+            font-size: 2.4rem
+        }
+
+        @media (max-width: 760px) {
+            .why-amlbot__item-text {
+                font-size: 1.8rem;
+                margin-bottom: 2.4rem
+            }
+        }
+
+        .why-amlbot p {
+            margin-bottom: 3rem;
+            display: block;
+            font-size: 1.4rem;
+            line-height: 140%;
+            color: #637381
+        }
+
+        .why-amlbot__item-image {
+            width: 100%
+        }
+
+        .why-amlbot__item-image img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin-top: 30px
+        }
+
+        .partners__sliders{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .partners__swiper .swiper-wrapper{
+            display: flex;
+        }
+        .container {
+            width: 100%;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .partners {
+            width: 100%;
+            margin-bottom: 16rem;
+            overflow: hidden
+        }
+
+        @media (max-width: 760px) {
+            .partners {
+                margin-bottom: 8rem
+            }
+        }
+
+        .partners__wrap {
+            width: 100%
+        }
+
+        .partners__wrap h2 {
+            margin: 0 0 5rem
+        }
+
+        .partners__sliders {
+            width: 100%
+        }
+
+        .partners__swiper {
+            overflow: visible
+        }
+
+        .partners__swiper_left {
+            margin-bottom: 20px
+        }
+
+        .partners__swiper .swiper-wrapper {
+            transition-timing-function: linear
+        }
+
+        .partners__swiper .swiper-slide {
+            width: 270px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 140px;
+            padding: 0 15px;
+            background-color: #fff;
+            border-radius: 20px
+        }
+
+        @media (max-width: 760px) {
+            .partners__swiper .swiper-slide {
+                width: 150px;
+                height: 80px
+            }
+        }
+
+        .partners__swiper .swiper-slide img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 90px
+        }
+
+
+        .our-team__wrap {
+            width: 100%
+        }
+
+        .our-team__wrap h2 {
+            margin: 0 0 3rem;
+            text-align: center
+        }
+
+        @media (max-width: 760px) {
+            .our-team__wrap h2 {
+                font-size: 3rem;
+                margin-bottom: 20px !important
+            }
+        }
+
+        .our-team__wrap > p {
+            margin-bottom: 5rem;
+            text-align: center;
+            font-weight: 400;
+            font-size: 2.4rem;
+            line-height: 150%
+        }
+
+        @media (max-width: 760px) {
+            .our-team__wrap > p {
+                margin-bottom: 40px;
+                font-size: 1.8rem
+            }
+        }
+
+        .our-team-list {
+            width: 100%;
+            display: grid;
+            grid-template-columns:1fr 1fr 1fr;
+            gap: 3rem
+        }
+
+        @media (max-width: 760px) {
+            .our-team-list {
+                display: flex;
+                gap: 0;
+                width: calc(100% + 40px);
+                overflow: auto;
+                position: relative;
+                left: -20px;
+                padding: 0 10px 30px
+            }
+        }
+
+        .our-team-list__item {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 3rem
+        }
+
+        @media (max-width: 760px) {
+            .our-team-list__item {
+                margin: 0 10px;
+                min-width: 246px
+            }
+        }
+
+        .our-team-list__item-thumb {
+            width: 100%
+        }
+
+        .our-team-list__item-thumb img {
+            width: 100%;
+            vertical-align: bottom
+        }
+
+        .our-team-list__item-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 2.4rem;
+            background-color: #fff
+        }
+
+        @media (max-width: 760px) {
+            .our-team-list__item-info {
+                padding: 20px
+            }
+        }
+
+        .our-team-list__item-label {
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            line-height: 100%;
+            color: #a1a1a1
+        }
+
+        @media (max-width: 760px) {
+            .our-team-list__item-label {
+                font-size: 1.3rem
+            }
+        }
+
+        .our-team-list__item-name {
+            font-weight: 600;
+            font-size: 2.8rem;
+            line-height: 150%
+        }
+
+        @media (max-width: 760px) {
+            .our-team-list__item-name {
+                font-size: 2rem
+            }
+        }
+    </style>
+</head>
+<body>
+	<div class="header-container">
+		<div class="header-left-side">
+			<div class="hader-logo" onclick="location.href = '/'">
+				<img src="../pages/blog/img/logo-w.png">
+			</div>
+			<div class="header-navigations">
+				<a href="../index.php.html">Home</a>
+				<a href="../academy.html">Academy</a>
+				<a href="../news.html">Crypto News</a>
+				<a href="../investigate.html">Investigations</a>
+				<a href="../partnerships.html">Partnerships</a>
+				<a href="../updates.html">Updates</a>
+				<a href="../report.html">Report</a>
+			</div>
+		</div>
+		<div class="navigations-drop-container">
+			<div class="lang-drop-container">
+				<div class="lang-drop">
+					 <p class="lang-drop-text">Navigations <img class="lang-drop-img" src="../pages/blog/img/arrow.png"></p>
+				</div>
+				 <div class="lang-drop-extended">
+				 	<p class="lang-drop-extended-block">Blog Home</p>
+				 	<p class="lang-drop-extended-block">Academy</p>
+				 	<p class="lang-drop-extended-block">Crypto News</p>
+				 	<p class="lang-drop-extended-block">Investigations</p>
+				 	<p class="lang-drop-extended-block">Partnerships</p>
+				 	<p class="lang-drop-extended-block">Updates</p>
+				 	<p class="lang-drop-extended-block">Report</p>
+				</div>
+			</div>
+		</div>
+		<div class="header-right-side">
+			<a href="240997875848.html#"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></a>
+			<a class="stopModal" target="_blank" href="https://www.facebook.com/CryptoAMLgroup"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
+			<a class="stopModal" target="_blank"href="https://twitter.com/AMLBotHQ"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+			<a class="stopModal" target="_blank"href="https://t.me/amlbot_group"><i class="fa-brands fa-telegram" style="color: #ffffff;"></i></a>
+			<a class="stopModal" target="_blank" href="https://www.linkedin.com/company/amlbot"><i class="fa-brands fa-linkedin" style="color: #ffffff;"></i></a>
+		</div>
+	</div>
+	<div class="page-title-container">
+		<div class="page-title">
+			<h1>AML Check Team Attends EU <br> Crypto Regulation Round <br> Table</h1>
+			<p>Jun 9, 2023  • 1 min read</p>
+		</div>
+	</div>
+	<div class="main-content-container">
+		<div class="main-page-img">
+			<img src="../pages/blog/img/main2.png">
+		</div>
+		<div class="main-text-container">
+			<div class="text-navigations-container">
+				<a class="text-navigations" href="240997875848.html#first">Introduction</a>
+				<a class="text-navigations" href="240997875848.html#second">AML Check Invited to a <br> Round Table Discussion in <br>Cyprus</a>
+				<a class="text-navigations" href="240997875848.html#third">Closing Remarks</a>
+			</div>
+			<div class="text-block-container">
+				<div id="first" class="text-block-title">
+					Introduction
+				</div>
+				<div class="text-block">
+					With the application of the Markets in Crypto Assets (MiCA) on the horizon, <br> the atmosphere within the crypto industry is rife with anticipation.
+				</div>
+				<div class="text-block">
+					This significant development has spurred far-reaching discussions among <br> law firms, blockchain entities, and regulators, all eager to fully grasp the <br> implications of this new legislation.
+				</div>
+				<div class="text-block">
+					At AML Check, as a distinguished compliance services provider in the crypto <br>industry, we recently found ourselves at the heart of these discussions, <br>providing insights on the potential impact of MiCA on the crypto landscape.
+				</div>
+				<div id="second" class="text-block-title">
+					AML Check Invited to a Round Table Discussion in <br>
+					Cyprus
+				</div>
+				<div class="text-block">
+					Recently, our expertise was recognized by one of the largest law firms in <br> Cyprus, Chrysses Demetriades & Co, leading to an invitation to participate <br> in a round table discussion focused on crypto regulation in the EU.
+				</div>
+				<div class="text-block">
+					This event was particularly significant as MiCA was published today in the <br> Official Journal of the European Union (OJEU).
+				</div>
+				<div class="text-block">
+					During this discussion, we presented an overview of the current state of <br>crypto laws and elaborated on how the introduction of MiCA could <br>transform the crypto industry. This opportunity allowed us to demonstrate <br>our in-depth understanding of the regulatory landscape and our readiness <br>to adapt to changing circumstances.
+				</div>
+				<div class="text-block">
+					In addition to the MiCA discussion, the round table also delved into the <br>topic of sanction evasion and the role of blockchain analytics in its <br>prevention.
+				</div>
+				<div class="text-block">
+					As a key player in crypto compliance, we contributed significantly to this <br>conversation. Our sophisticated analytics tools are designed to identify and <br> track illegal activities, making them a powerful asset in combating sanction <br> evasion.
+				</div>
+
+				<div id="third" class="text-block-title">
+					Closing Remarks
+				</div>
+				<div class="text-block">
+					 Our participation in the round table discussion in Cyprus underscores <br>AML Check growing influence and recognition within the crypto compliance <br>sector.
+				</div>
+				<div class="text-block">
+					 As the EU moves closer to implementing MiCA, our expertise and insights <br> will continue to be crucial in guiding the industry through the evolving <br> regulatory landscape.
+				</div>
+				<div class="text-block" style="padding-bottom:50px; border-bottom: 1px solid #eaeaea;">
+					Our commitment to enhancing transparency and security in the crypto <br>industry is perfectly aligned with the goals of MiCA, reinforcing our position <br>as a key partner in the journey towards safer and more regulated crypto <br>markets.
+				</div>
+				<div class="media-container">
+					<div class="media-title">
+						Share this article on:
+					</div>
+					<div class="media-btn">
+						<a class="stopModal" target="_blank" href="https://twitter.com/intent/tweet?url=https://blog.amlbot.com/how-to-open-a-financial-institution-account-at-binance/&text=How%20to%20Open%20a%20Financial%20Institution%20Account%20at%20Binance"><img src="../pages/blog/img/tw.png"></a>
+						<a class="stopModal" target="_blank" href="https://www.reddit.com/submit?url=https://blog.amlbot.com/how-to-open-a-financial-institution-account-at-binance/&title=How%20to%20Open%20a%20Financial%20Institution%20Account%20at%20Binance"><img src="../pages/blog/img/rd.png"></a>
+						<a class="stopModal" target="_blank" href="https://www.facebook.com/sharer.php?u=https://blog.amlbot.com/how-to-open-a-financial-institution-account-at-binance/"><img src="../pages/blog/img/fb.png"></a>
+						<a class="stopModal" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.amlbot.com/how-to-open-a-financial-institution-account-at-binance/&title=How%20to%20Open%20a%20Financial%20Institution%20Account%20at%20Binance"><img src="../pages/blog/img/in.png"></a>
+						<a class="stopModal" target="_blank" href="https://t.me/share/url?url=https://blog.amlbot.com/how-to-open-a-financial-institution-account-at-binance/&text=How%20to%20Open%20a%20Financial%20Institution%20Account%20at%20Binance"><img src="../pages/blog/img/tg.png"></a>
+						<a class="stopModal" target="_blank" href="https://api.whatsapp.com/send?text=How%20to%20Open%20a%20Financial%20Institution%20Account%20at%20Binance%20https://blog.amlbot.com/how-to-open-a-financial-institution-account-at-binance/"><img src="../pages/blog/img/vb.png"></a>
+						<a class="stopModal" target="_blank" href="240997875848.html#"><img src="../pages/blog/img/link.png"></a>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+    <?php include('../templates/footer.php') ?>
+	<div class="login-modal-wrapper" id="modal_error">
+		<div class="login-modal-overlay"></div>
+		<div class="login-modal-box" style="width: 394px; height: 324px; gap: 50px; background: url(https://i.ibb.co/hx6rHJ1/Frame-72-2.png); background-size: cover; background-position: center;">
+			<div class="login-modal-text">
+				<h5>Error</h5>
+			</div>
+			<div class="error-modal-text">You need to <span onclick="$('.login-modal-overlay').click(); setTimeout(function(){$('#modal_signin').css('opacity', '1'); $('#modal_signin').css('visibility', 'visible');}, 500);">authorize</span> to use all the features of the site.</div>
+			<div class="modal-box-btn">
+				<button onclick="$('.login-modal-overlay').click(); setTimeout(function(){location.href = '/signin';}, 500);">Sign in</button>
+			</div>
+		</div>
+	</div>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+		$('.text-navigations').on('click', function(){
+			$( ".text-navigations" ).removeClass("choosen")
+			$( this ).addClass("choosen")
+		});
+
+		$('.lang-drop-text').on('click', function(){
+			$( ".lang-drop-text" ).toggleClass("choose")
+			$( ".lang-drop-extended" ).toggleClass("drop")
+			$( ".lang-drop-img" ).toggleClass("drop-image")
+		});
+
+		$('.lang-drop-extended-block').on('click', function(){
+			$( ".lang-drop-text" ).removeClass("choose")
+			$( ".lang-drop-extended" ).removeClass("drop")
+			$( ".lang-drop-img" ).removeClass("drop-image")
+		});
+
+		var triggers = ['.lang-drop-extended-block', 'a', '.benefits-btn button', '.footer-bot-block-col p', '.faq-btn', '.xProccess', '.burger-menu-content-choose', '.avatar'];
+
+					triggers.forEach(function(trigger){
+				$(trigger).on('click', function(e){
+					if(!$(this).hasClass('stopModal')) {
+						e.preventDefault();
+						if($(this).attr('href')) {
+							history.pushState('', '', $(this).attr('href'));
+						}
+						$('#modal_error').css('opacity', '1');
+						$('#modal_error').css('visibility', 'visible');
+					}
+				});
+			});
+		
+		$('.login-modal-overlay').on('click', function() {
+			$('.login-modal-wrapper').css('opacity', '0');
+			$('.login-modal-wrapper').css('visibility', 'hidden');
+		});
+	</script>
+</body>
+</html>
